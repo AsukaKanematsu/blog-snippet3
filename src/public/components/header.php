@@ -1,10 +1,11 @@
+
 <header>
   <div class="w-full">
     <nav class="bg-white shadow-lg">
       <div class="md:flex items-center justify-between py-2 px-8 md:px-12">
         <div class="flex justify-between items-center">
           <div class="text-2xl font-bold text-gray-800 md:text-3xl">
-            こんにちは！<?php echo $_SESSION['userName']; ?>
+            こんにちは！<?php echo $_SESSION['user']['name']; ?>
           </div>
         </div>
         <div class="flex flex-col md:flex-row hidden md:block -mx-2">
