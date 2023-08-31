@@ -4,7 +4,7 @@ namespace App\UseCase\UseCaseInteractor;
 
 use App\Domain\ValueObject\User\UserId;
 use App\Domain\ValueObject\BlogTitle;
-use App\Domain\ValueObject\Contents;
+use App\Domain\ValueObject\BlogContents;
 use App\UseCase\UseCaseInput\CreateBlogInput;
 use App\UseCase\UseCaseOutput\CreateBlogOutput;
 use App\Adapter\Repository\BlogRepository;
@@ -61,7 +61,11 @@ final class CreateBlogInteractor
     public function handler(): CreateBlogOutput
     {
         $this->userRepository->insert(
-            new NewBlog($this->input->title(), $this->input->contents())
+            new NewBlog(
+                $this->input->id(),
+                $this->input->Title(),
+                $this->input->Contents()
+            )
         );
         return new CreateBlogOutput(true, self::COMPLETED_MESSAGE);
     }

@@ -1,11 +1,20 @@
 <?php
+// var_dump($_SESSION['errors']);
+// die();
 session_start();
-if (!isset($_SESSION['id'])) {
+// var_dump($_SESSION['user']['id']);
+// die();
+if (!isset($_SESSION['user']['id'])) {
+    // die('ifのなか');
     header('Location: ./user/signin.php');
     exit();
 }
-$error = $_SESSION['errors'] ?? '';
+// var_dump($_SESSION['errors']);
+// die();
+$errors = $_SESSION['errors'] ?? '';
 unset($_SESSION['errors']);
+
+// die('エラー');
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +39,9 @@ unset($_SESSION['errors']);
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white">
                   <div class="flex-auto p-5 lg:p-10">
                     <h4 class="text-2xl mb-4 text-black font-semibold">新規記事</h4>
-                    <p class="text-black"><?php echo $error; ?></p>
+                      <?php foreach ($errors as $error): ?>
+                        <p class="text-black"><?php echo $error; ?></p>
+                      <?php endforeach; ?>
                     <form id="form" action="./post/store.php" method="post">
                       <div class="relative w-full mb-3">
                         <label class="block uppercase text-gray-700 text-xs font-bold mb-2"

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domain\ValueObject;
+namespace App\Domain\ValueObject\Blog;
 use Exception;
 
 /**
  * ユーザーの名前用のValueObject
  */
-final class Contents
+final class BlogContents
 {
     /**
      * ユーザーの名前が不正な場合のエラーメッセージ

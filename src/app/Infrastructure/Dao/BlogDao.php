@@ -5,7 +5,7 @@ namespace App\Infrastructure\Dao;
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use App\Domain\ValueObject\blog\NewBlog;
-use App\Domain\ValueObject\contents;
+use App\Domain\ValueObject\blog\BlogContents;
 use \PDO;
 use PDOException;
 
@@ -32,7 +32,7 @@ final class BlogDao
     {
         try {
             $this->pdo = new PDO(
-                'mysql:dbtitle=blog;host=mysql;charset=utf8',
+                'mysql:dbname=blog;host=mysql;charset=utf8',
                 'root',
                 'password'
             );
@@ -48,10 +48,11 @@ final class BlogDao
     public function create(NewBlog $blog): void
     {
         $sql = sprintf(
-            'INSERT INTO %s (title, contents) VALUES (:title, :contents)',
+            'INSERT INTO blogs (user_id, title, contents) VALUES (:userId, :title, :contents)',
             self::TABLE_title
         );
         $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':userId', $blog->id()->value(), PDO::PARAM_STR);
         $statement->bindValue(
             ':title',
             $blog->title()->value(),
@@ -70,7 +71,7 @@ final class BlogDao
      * @param  contents $contents
      * @return array | null
      */
-    public function findBycontents(contents $contents): ?array
+    public function findBycontents(BlogContents $contents): ?array
     {
         $sql = sprintf(
             'SELECT * FROM %s WHERE contents = :contents',

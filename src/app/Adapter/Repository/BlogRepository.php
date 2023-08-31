@@ -2,23 +2,23 @@
 
 namespace App\Adapter\Repository;
 require_once __DIR__ . '/../../../vendor/autoload.php';
-use App\Infrastructure\Dao\UserDao;
-use App\Domain\ValueObject\User\NewUser;
+use App\Infrastructure\Dao\BlogDao;
+use App\Domain\ValueObject\blog\NewBlog;
 
 final class BlogRepository
 {
     /**
-     * @var UserDao
+     * @var BlogDao
      */
-    private $userDao;
+    private $blogDao;
 
     public function __construct()
     {
-        $this->userDao = new UserDao();
+        $this->blogDao = new BlogDao();
     }
 
-    public function insert(NewUser $user): void
+    public function insert(NewBlog $blog): void
     {
-        $this->userDao->create($user);
+        $this->blogDao->create($blog);
     }
 }
