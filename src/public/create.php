@@ -2,19 +2,13 @@
 // var_dump($_SESSION['errors']);
 // die();
 session_start();
-// var_dump($_SESSION['user']['id']);
-// die();
 if (!isset($_SESSION['user']['id'])) {
-    // die('ifのなか');
     header('Location: ./user/signin.php');
     exit();
 }
-// var_dump($_SESSION['errors']);
-// die();
+
 $errors = $_SESSION['errors'] ?? '';
 unset($_SESSION['errors']);
-
-// die('エラー');
 ?>
 
 <!DOCTYPE html>

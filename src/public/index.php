@@ -30,11 +30,10 @@ $pdo = new PDO(
     $dbPassword
 );
 
-$query = "SELECT * FROM blogs WHERE (title LIKE :title OR contents LIKE :contents) AND user_id = :userId ORDER BY id $direction";
+$query = "SELECT * FROM blogs WHERE title LIKE :title OR contents LIKE :contents  ORDER BY id $direction";
 $stmt = $pdo->prepare($query);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
-$stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
 $stmt->execute();
 $posts = $stmt->fetchAll();
 ?>

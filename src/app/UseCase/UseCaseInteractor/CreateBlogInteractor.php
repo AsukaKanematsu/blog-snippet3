@@ -32,11 +32,6 @@ final class CreateBlogInteractor
     private $userRepository;
 
     /**
-     * @var UserQueryServise
-     */
-    private $userQueryServise;
-
-    /**
      * @var CreateBlogInput
      */
     private $input;
