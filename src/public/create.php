@@ -1,6 +1,4 @@
 <?php
-// var_dump($_SESSION['errors']);
-// die();
 session_start();
 if (!isset($_SESSION['user']['id'])) {
     header('Location: ./user/signin.php');
