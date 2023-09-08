@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['user']['id'])) {
     header('Location: ./user/signin.php');
     exit();
 }
@@ -21,7 +21,7 @@ $blogsInfoList = $statement->fetchAll(PDO::FETCH_ASSOC);
 $myBlogsInfoList = [];
 foreach ($blogsInfoList as $blogsInfo) {
     //ブログを全記事取得して、ログインユーザーの投稿した記事だけに絞り込む
-    if ($_SESSION['id'] == $blogsInfo['user_id']) {
+    if ($_SESSION['user']['id'] == $blogsInfo['user_id']) {
         $myBlogsInfoList[] = $blogsInfo;
     }
 }

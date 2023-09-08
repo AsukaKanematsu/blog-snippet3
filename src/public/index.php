@@ -19,6 +19,9 @@ if (isset($_GET['search_query'])) {
     $contents = '%%';
 }
 
+//ユーザーのidを取得する処理
+$userId = $_SESSION['user']['id'];
+
 $dbUserName = 'root';
 $dbPassword = 'password';
 $pdo = new PDO(
@@ -27,7 +30,7 @@ $pdo = new PDO(
     $dbPassword
 );
 
-$query = "SELECT * FROM blogs WHERE title LIKE :title OR contents LIKE :contents ORDER BY id $direction";
+$query = "SELECT * FROM blogs WHERE title LIKE :title OR contents LIKE :contents  ORDER BY id $direction";
 $stmt = $pdo->prepare($query);
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);
 $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);

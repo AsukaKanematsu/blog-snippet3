@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['user']['id'])) {
     header('Location: ./user/signin.php');
     exit();
 }
@@ -14,11 +14,13 @@ $pdo = new PDO(
 );
 
 $blogId = filter_input(INPUT_GET, 'id');
-$sqlUserId = "SELECT user_id FROM blogs WHERE id = $blogId";
+$sqlUserId = 'SELECT user_id FROM blogs WHERE id = :id';
+
 $statement = $pdo->prepare($sqlUserId);
+$statement->bindValue(':id', $blogId, PDO::PARAM_INT);
 $statement->execute();
 $userId = $statement->fetch(PDO::FETCH_COLUMN);
-if ($userId != $_SESSION['id']) {
+if ($userId !== $_SESSION['user']['id']) {
     header('Location: ./mypage.php');
     exit();
 }

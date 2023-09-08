@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['id'])) {
+if (empty($_SESSION['user']['id'])) {
     $_SESSION['errors'][] = 'ログインしてください';
     header('Location: ../user/signin.php');
     exit();
